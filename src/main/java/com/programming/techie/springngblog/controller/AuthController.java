@@ -2,6 +2,7 @@ package com.programming.techie.springngblog.controller;
 
 import com.programming.techie.springngblog.dto.LoginRequest;
 import com.programming.techie.springngblog.dto.RegisterRequest;
+import com.programming.techie.springngblog.model.Token;
 import com.programming.techie.springngblog.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest) {
-        return authService.login(loginRequest);
+    public Token login(@RequestBody LoginRequest loginRequest) {
+        Token token = new Token();
+        token.setToken(authService.login(loginRequest));
+        return token;
     }
 }
